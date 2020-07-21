@@ -3,12 +3,16 @@ import { getDate, getMonth, getYear } from 'date-fns';
 import { DateInputsProps, Unit, DateUnits } from './types';
 import { isValid, getCappedUnits } from './utils/date';
 
+const BASE_CLASS = 'react-date-inputs';
+
 const DateInputs: React.FC<DateInputsProps> = ({
   value,
   onChange,
   dayPlaceholder,
   monthPlaceholder,
   yearPlaceholder,
+  className,
+  label,
 }: DateInputsProps) => {
   const [parsedValues, setParsedValues] = React.useState<DateUnits>({
     day: getDate(value) || undefined,
@@ -33,13 +37,15 @@ const DateInputs: React.FC<DateInputsProps> = ({
   };
 
   return (
-    <div>
+    <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`}>
+      {label && <label className={`${BASE_CLASS}__label`}>{label}</label>}
       <input
         type="text"
         pattern="[0-9]*"
         placeholder={dayPlaceholder || 'DD'}
         onChange={(e) => handleChange(e, Unit.day)}
         value={parsedValues.day}
+        className={`${BASE_CLASS}__day`}
       />
       <input
         type="text"
@@ -47,6 +53,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
         placeholder={monthPlaceholder || 'MM'}
         onChange={(e) => handleChange(e, Unit.month)}
         value={parsedValues.month}
+        className={`${BASE_CLASS}__month`}
       />
       <input
         type="text"
@@ -54,6 +61,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
         placeholder={yearPlaceholder || 'YYYY'}
         onChange={(e) => handleChange(e, Unit.year)}
         value={parsedValues.year}
+        className={`${BASE_CLASS}__year`}
       />
     </div>
   );

@@ -4,6 +4,8 @@ export interface DateInputsProps {
   dayPlaceholder?: string;
   monthPlaceholder?: string;
   yearPlaceholder?: string;
+  className?: string;
+  label?: string;
 }
 
 export enum Unit {

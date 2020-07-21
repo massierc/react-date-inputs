@@ -11,7 +11,7 @@ export const Simple = () => {
 
   return (
     <>
-      <DateInputs value={value} onChange={setValue} />
+      <DateInputs value={value} onChange={setValue} label="Date" />
       <p>{`value: ${value}`}</p>
     </>
   );
