@@ -1,11 +1,6 @@
 import * as React from 'react';
-import { format } from 'date-fns';
+import { isValid, getDate, getMonth, getYear } from 'date-fns';
 import { DateInputsProps, Unit } from './types';
-import { getDate } from './utils/date';
-
-function defaultFormatter(date: Date): string {
-  return format(date, 'dd/MM/yyyy');
-}
 
 const DateInputs: React.FC<DateInputsProps> = ({
   value,
@@ -13,21 +8,28 @@ const DateInputs: React.FC<DateInputsProps> = ({
   dayPlaceholder,
   monthPlaceholder,
   yearPlaceholder,
-  formatter,
 }: DateInputsProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, inputId: Unit) => {
-    const newUnitVal = parseInt(e.target.value, 10) || undefined;
-    const newValue = { ...value, [inputId]: newUnitVal };
-    const newDate = getDate(newValue);
+  const [parsedValue, setParsedValue] = React.useState({
+    day: getDate(value) || undefined,
+    month: getMonth(value) || undefined,
+    year: getYear(value) || undefined,
+  });
 
-    if (newDate) {
-      newValue.date = newDate;
-      newValue.formatted = formatter
-        ? formatter({ ...newValue, date: newDate })
-        : defaultFormatter(newDate);
+  React.useEffect(() => {
+    if (
+      parsedValue.day === undefined ||
+      parsedValue.month === undefined ||
+      parsedValue.year === undefined
+    ) {
+      onChange(undefined);
+    } else {
+      const newDate = new Date(parsedValue.year, parsedValue.month - 1, parsedValue.day);
+      onChange(isValid(newDate) ? newDate : undefined);
     }
+  }, [parsedValue]);
 
-    onChange(newValue);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, inputId: Unit) => {
+    setParsedValue({ ...parsedValue, [inputId]: parseInt(e.target.value, 10) || undefined });
   };
 
   return (
@@ -37,21 +39,21 @@ const DateInputs: React.FC<DateInputsProps> = ({
         pattern="[0-9]*"
         placeholder={dayPlaceholder || 'DD'}
         onChange={(e) => handleChange(e, Unit.day)}
-        value={value.day}
+        value={parsedValue.day}
       />
       <input
         type="text"
         pattern="[0-9]*"
         placeholder={monthPlaceholder || 'MM'}
         onChange={(e) => handleChange(e, Unit.month)}
-        value={value.month}
+        value={parsedValue.month}
       />
       <input
         type="text"
         pattern="[0-9]*"
         placeholder={yearPlaceholder || 'YYYY'}
         onChange={(e) => handleChange(e, Unit.year)}
-        value={value.year}
+        value={parsedValue.year}
       />
     </div>
   );

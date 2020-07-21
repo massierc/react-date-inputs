@@ -9,7 +9,12 @@ export default {
 export const Simple = () => {
   const [value, setValue] = useState();
 
-  return <DateInputs value={value} onChange={setValue} />;
+  return (
+    <>
+      <DateInputs value={value} onChange={setValue} />
+      <p>{`value: ${value}`}</p>
+    </>
+  );
 };
 
 Simple.story = {
