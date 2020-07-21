@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DateInputs from './index.tsx';
 
 export default {
@@ -6,9 +6,11 @@ export default {
   component: DateInputs,
 };
 
-export const Simple = () => (
-  <DateInputs dayPlaceholder="DD" monthPlaceholder="MM" yearPlaceholder="AAAA" />
-);
+export const Simple = () => {
+  const [value, setValue] = useState();
+
+  return <DateInputs value={value} onChange={setValue} />;
+};
 
 Simple.story = {
   name: 'Simple',
