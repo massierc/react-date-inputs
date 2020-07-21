@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { isValid, getDate, getMonth, getYear } from 'date-fns';
-import { DateInputsProps, Unit } from './types';
+import { getDate, getMonth, getYear } from 'date-fns';
+import { DateInputsProps, Unit, DateUnits } from './types';
+import { isValid, getCappedUnits } from './utils/date';
 
 const DateInputs: React.FC<DateInputsProps> = ({
   value,
@@ -9,27 +10,26 @@ const DateInputs: React.FC<DateInputsProps> = ({
   monthPlaceholder,
   yearPlaceholder,
 }: DateInputsProps) => {
-  const [parsedValue, setParsedValue] = React.useState({
+  const [parsedValues, setParsedValues] = React.useState<DateUnits>({
     day: getDate(value) || undefined,
     month: getMonth(value) || undefined,
     year: getYear(value) || undefined,
   });
 
   React.useEffect(() => {
-    if (
-      parsedValue.day === undefined ||
-      parsedValue.month === undefined ||
-      parsedValue.year === undefined
-    ) {
-      onChange(undefined);
-    } else {
-      const newDate = new Date(parsedValue.year, parsedValue.month - 1, parsedValue.day);
-      onChange(isValid(newDate) ? newDate : undefined);
-    }
-  }, [parsedValue]);
+    const { day, month, year } = parsedValues;
+    if (day === undefined || month === undefined || year === undefined) return onChange(undefined);
+    if (isValid(day, month, year)) return onChange(new Date(year, month - 1, day));
+    return onChange(undefined);
+  }, [parsedValues]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, inputId: Unit) => {
-    setParsedValue({ ...parsedValue, [inputId]: parseInt(e.target.value, 10) || undefined });
+    const val = parseInt(e.target.value, 10);
+    const newUnitValue: number | undefined = val >= 0 ? val : undefined;
+    const newParsedValues = { ...parsedValues, [inputId]: newUnitValue };
+    const cappedValues = getCappedUnits(newParsedValues);
+
+    setParsedValues(cappedValues);
   };
 
   return (
@@ -39,21 +39,21 @@ const DateInputs: React.FC<DateInputsProps> = ({
         pattern="[0-9]*"
         placeholder={dayPlaceholder || 'DD'}
         onChange={(e) => handleChange(e, Unit.day)}
-        value={parsedValue.day}
+        value={parsedValues.day}
       />
       <input
         type="text"
         pattern="[0-9]*"
         placeholder={monthPlaceholder || 'MM'}
         onChange={(e) => handleChange(e, Unit.month)}
-        value={parsedValue.month}
+        value={parsedValues.month}
       />
       <input
         type="text"
         pattern="[0-9]*"
         placeholder={yearPlaceholder || 'YYYY'}
         onChange={(e) => handleChange(e, Unit.year)}
-        value={parsedValue.year}
+        value={parsedValues.year}
       />
     </div>
   );

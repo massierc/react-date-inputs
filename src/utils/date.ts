@@ -1,7 +1,10 @@
-export function daysInMonth(month: number, year: number): number {
+import { isValid as isValidFns } from 'date-fns';
+import { DateUnits } from '../types';
+
+export function daysInMonth(month: number, year?: number): number {
   switch (month) {
     case 2:
-      return (year % 4 == 0 && year % 100) || year % 400 == 0 ? 29 : 28;
+      return year && ((year % 4 == 0 && year % 100) || year % 400 == 0) ? 29 : 28;
     case 9:
     case 4:
     case 6:
@@ -13,5 +16,16 @@ export function daysInMonth(month: number, year: number): number {
 }
 
 export function isValid(day: number, month: number, year: number): boolean {
-  return month >= 1 && month < 13 && day > 0 && day <= daysInMonth(month, year);
+  const date = new Date(year, month - 1, day);
+  return month >= 1 && month < 13 && day > 0 && day <= daysInMonth(month, year) && isValidFns(date);
+}
+
+export function getCappedUnits({ day, month, year }: DateUnits): DateUnits {
+  const maxDays = month ? daysInMonth(month, year) : 31;
+
+  return {
+    day: day && day > maxDays ? maxDays : day,
+    month: month && month > 12 ? 12 : month,
+    year: year && year > 9999 ? 9999 : year,
+  };
 }

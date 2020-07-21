@@ -11,3 +11,9 @@ export enum Unit {
   month = 'month',
   year = 'year',
 }
+
+export interface DateUnits {
+  day?: number;
+  month?: number;
+  year?: number;
+}
