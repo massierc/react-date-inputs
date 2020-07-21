@@ -1,0 +1,86 @@
+{
+  "name": "react-date-inputs",
+  "version": "1.0.0",
+  "description": "Simple date inputs for React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint './src/**/*.{js,ts,tsx}' --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/massierc/react-date-inputs.git"
+  },
+  "keywords": [
+    "react",
+    "date",
+    "inputs",
+    "datepicker",
+    "input"
+  ],
+  "author": "massierc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/massierc/react-date-inputs/issues"
+  },
+  "homepage": "https://github.com/massierc/react-date-inputs#readme",
+  "dependencies": {
+    "@types/react": "16.9.43",
+    "@types/react-dom": "16.9.8",
+    "typescript": "3.9.7"
+  },
+  "devDependencies": {
+    "@babel/core": "7.10.5",
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@storybook/addon-actions": "5.3.19",
+    "@storybook/addon-info": "5.3.19",
+    "@storybook/addon-links": "5.3.19",
+    "@storybook/addons": "5.3.19",
+    "@storybook/react": "5.3.19",
+    "@types/jest": "26.0.5",
+    "@typescript-eslint/eslint-plugin": "3.7.0",
+    "@typescript-eslint/parser": "3.7.0",
+    "babel-loader": "8.1.0",
+    "eslint": "7.5.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-import-resolver-typescript": "2.0.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-prettier": "3.1.4",
+    "eslint-plugin-react": "7.20.3",
+    "eslint-plugin-unused-imports": "0.1.2",
+    "husky": "4.2.5",
+    "jest": "26.1.0",
+    "lint-staged": "10.2.11",
+    "prettier": "2.0.5",
+    "react-docgen-typescript-loader": "3.7.2",
+    "standard-version": "7.0.1",
+    "ts-jest": "26.1.3",
+    "ts-loader": "8.0.1"
+  },
+  "peerDependencies": {
+    "react": "16.x.x",
+    "react-dom": "16.x.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
