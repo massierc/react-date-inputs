@@ -13,7 +13,7 @@ DefaultInputComponent.displayName = 'DefaultInputComponent';
 
 const DefaultLabelComponent = (props: any) => <label {...props} />;
 
-const DateInputs: React.FC<DateInputsProps> = ({
+export const DateInputs: React.FC<DateInputsProps> = ({
   value,
   onChange,
   onBlur,
