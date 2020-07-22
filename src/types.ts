@@ -9,6 +9,7 @@ export interface DateInputsProps {
   label?: string;
   disabled?: boolean;
   inputComponent?: React.ReactType;
+  labelComponent?: React.ReactType;
 }
 
 export enum Unit {

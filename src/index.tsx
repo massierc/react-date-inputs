@@ -11,6 +11,8 @@ const DefaultInputComponent = React.forwardRef((props: any, ref: React.Ref<HTMLI
 
 DefaultInputComponent.displayName = 'DefaultInputComponent';
 
+const DefaultLabelComponent = (props: any) => <label {...props} />;
+
 const DateInputs: React.FC<DateInputsProps> = ({
   value,
   onChange,
@@ -22,6 +24,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
   label,
   disabled,
   inputComponent: InputComponent = DefaultInputComponent,
+  labelComponent: LabelComponent = DefaultLabelComponent,
 }: DateInputsProps) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
@@ -70,7 +73,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
 
   return (
     <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`}>
-      {label && <label className={`${BASE_CLASS}__label`}>{label}</label>}
+      {label && <LabelComponent className={`${BASE_CLASS}__label`}>{label}</LabelComponent>}
       <div onBlur={handleGroupBlur} className={`${BASE_CLASS}__inputs-wrapper`}>
         <InputComponent
           type="text"

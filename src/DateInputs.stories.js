@@ -38,12 +38,32 @@ export const Disabled = () => {
 };
 
 const CustomInputComponent = React.forwardRef((props, ref) => {
-  return <input style={{ background: 'yellow' }} {...props} ref={ref} />;
+  return (
+    <input
+      style={{ padding: '6px', marginRight: '4px', marginTop: '0.2rem' }}
+      {...props}
+      ref={ref}
+    />
+  );
 });
 
 CustomInputComponent.displayName = 'CustomInputComponent';
 
-export const WithCustomInput = () => {
+const CustomLabelComponent = (props) => {
+  return (
+    <label
+      style={{
+        textTransform: 'uppercase',
+        fontFamily: 'sans-serif',
+        fontWeight: 'bold',
+        fontSize: '0.8rem',
+      }}
+      {...props}
+    />
+  );
+};
+
+export const WithCustomComponents = () => {
   const [value, setValue] = useState();
 
   return (
@@ -53,6 +73,7 @@ export const WithCustomInput = () => {
         onChange={setValue}
         label="Date"
         inputComponent={CustomInputComponent}
+        labelComponent={CustomLabelComponent}
       />
       <p>{`value: ${value}`}</p>
     </>
