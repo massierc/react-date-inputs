@@ -1,12 +1,13 @@
 export interface DateInputsProps {
   value: Date;
-  onChange(value?: Date): undefined;
+  onChange?(value?: Date): undefined;
   onBlur?(): undefined;
   dayPlaceholder?: string;
   monthPlaceholder?: string;
   yearPlaceholder?: string;
   className?: string;
   label?: string;
+  disabled?: boolean;
 }
 
 export enum Unit {

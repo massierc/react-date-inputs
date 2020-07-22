@@ -17,6 +17,22 @@ export const Simple = () => {
   );
 };
 
-Simple.story = {
-  name: 'Simple',
+// Simple.story = {
+//   name: 'Simple',
+//   decorators: [(storyFn) => <div>{storyFn()}</div>],
+// };
+
+export const WithInitialValue = () => {
+  const [value, setValue] = useState(new Date());
+
+  return (
+    <>
+      <DateInputs value={value} onChange={setValue} label="Date" />
+      <p>{`value: ${value}`}</p>
+    </>
+  );
+};
+
+export const Disabled = () => {
+  return <DateInputs label="Date" value={null} disabled />;
 };
