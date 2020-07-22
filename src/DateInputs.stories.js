@@ -19,5 +19,4 @@ export const Simple = () => {
 
 Simple.story = {
   name: 'Simple',
-  decorators: [(storyFn) => <div style={{ background: 'red' }}>{storyFn()}</div>],
 };
