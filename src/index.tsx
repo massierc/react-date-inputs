@@ -14,6 +14,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
   yearPlaceholder,
   className,
   label,
+  disabled,
 }: DateInputsProps) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
@@ -26,6 +27,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
   });
 
   useEffect(() => {
+    if (!onChange) return;
     const { day, month, year } = parsedValues;
     if (day === undefined || month === undefined || year === undefined) return onChange(undefined);
     if (isValid(day, month, year)) return onChange(new Date(year, month - 1, day));
@@ -71,6 +73,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
           value={parsedValues.day || ''}
           className={`${BASE_CLASS}__day`}
           ref={dayInputRef}
+          disabled={disabled}
         />
         <input
           type="text"
@@ -80,6 +83,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
           value={parsedValues.month || ''}
           className={`${BASE_CLASS}__month`}
           ref={monthInputRef}
+          disabled={disabled}
         />
         <input
           type="text"
@@ -89,6 +93,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
           value={parsedValues.year || ''}
           className={`${BASE_CLASS}__year`}
           ref={yearInputRef}
+          disabled={disabled}
         />
       </div>
     </div>
