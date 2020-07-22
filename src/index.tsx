@@ -1,4 +1,4 @@
-import { default as React, useRef, useEffect } from 'react';
+import { default as React, useRef, useEffect, useState } from 'react';
 import { getDate, getMonth, getYear } from 'date-fns';
 import { DateInputsProps, Unit, DateUnits } from './types';
 import { daysInMonth, isValid, getCappedUnits } from './utils/date';
@@ -8,6 +8,7 @@ const BASE_CLASS = 'react-date-inputs';
 const DateInputs: React.FC<DateInputsProps> = ({
   value,
   onChange,
+  onBlur,
   dayPlaceholder,
   monthPlaceholder,
   yearPlaceholder,
@@ -18,7 +19,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
 
-  const [parsedValues, setParsedValues] = React.useState<DateUnits>({
+  const [parsedValues, setParsedValues] = useState<DateUnits>({
     day: getDate(value) || undefined,
     month: getMonth(value) || undefined,
     year: getYear(value) || undefined,
@@ -48,42 +49,48 @@ const DateInputs: React.FC<DateInputsProps> = ({
     setParsedValues(cappedValues);
   };
 
+  const handleGroupBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
+    const { currentTarget } = e;
+
+    setTimeout(() => {
+      if (!currentTarget.contains(document.activeElement)) {
+        onBlur && onBlur();
+      }
+    }, 0);
+  };
+
   return (
     <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`}>
       {label && <label className={`${BASE_CLASS}__label`}>{label}</label>}
-      <input
-        type="text"
-        pattern="[0-9]*"
-        placeholder={dayPlaceholder || 'DD'}
-        onChange={(e) => handleChange(e, Unit.day)}
-        // onFocus={() => console.log('focus day')}
-        // onBlur={() => console.log('blur day')}
-        value={parsedValues.day || ''}
-        className={`${BASE_CLASS}__day`}
-        ref={dayInputRef}
-      />
-      <input
-        type="text"
-        pattern="[0-9]*"
-        placeholder={monthPlaceholder || 'MM'}
-        onChange={(e) => handleChange(e, Unit.month)}
-        // onFocus={() => console.log('focus month')}
-        // onBlur={() => console.log('blur month')}
-        value={parsedValues.month || ''}
-        className={`${BASE_CLASS}__month`}
-        ref={monthInputRef}
-      />
-      <input
-        type="text"
-        pattern="[0-9]*"
-        placeholder={yearPlaceholder || 'YYYY'}
-        onChange={(e) => handleChange(e, Unit.year)}
-        // onFocus={() => console.log('focus year')}
-        // onBlur={() => console.log('blur year')}
-        value={parsedValues.year || ''}
-        className={`${BASE_CLASS}__year`}
-        ref={yearInputRef}
-      />
+      <div onBlur={handleGroupBlur} className={`${BASE_CLASS}__inputs-wrapper`}>
+        <input
+          type="text"
+          pattern="[0-9]*"
+          placeholder={dayPlaceholder || 'DD'}
+          onChange={(e) => handleChange(e, Unit.day)}
+          value={parsedValues.day || ''}
+          className={`${BASE_CLASS}__day`}
+          ref={dayInputRef}
+        />
+        <input
+          type="text"
+          pattern="[0-9]*"
+          placeholder={monthPlaceholder || 'MM'}
+          onChange={(e) => handleChange(e, Unit.month)}
+          value={parsedValues.month || ''}
+          className={`${BASE_CLASS}__month`}
+          ref={monthInputRef}
+        />
+        <input
+          type="text"
+          pattern="[0-9]*"
+          placeholder={yearPlaceholder || 'YYYY'}
+          onChange={(e) => handleChange(e, Unit.year)}
+          value={parsedValues.year || ''}
+          className={`${BASE_CLASS}__year`}
+          ref={yearInputRef}
+        />
+      </div>
     </div>
   );
 };
