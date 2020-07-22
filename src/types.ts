@@ -1,5 +1,5 @@
 export interface DateInputsProps {
-  value: Date;
+  value?: Date;
   onChange?(value?: Date): undefined;
   onBlur?(): undefined;
   dayPlaceholder?: string;

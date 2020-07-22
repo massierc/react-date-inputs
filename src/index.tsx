@@ -3,7 +3,7 @@ import { getDate, getMonth, getYear } from 'date-fns';
 import { DateInputsProps, Unit, DateUnits } from './types';
 import { daysInMonth, isValid, getCappedUnits } from './utils/date';
 
-const BASE_CLASS = 'react-date-inputs';
+export const BASE_CLASS = 'react-date-inputs';
 
 const DefaultInputComponent = React.forwardRef((props: any, ref: React.Ref<HTMLInputElement>) => (
   <input {...props} ref={ref} />
@@ -31,14 +31,21 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   const yearInputRef = useRef<HTMLInputElement>(null);
 
   const [parsedValues, setParsedValues] = useState<DateUnits>({
-    day: getDate(value) || undefined,
-    month: getMonth(value) || undefined,
-    year: getYear(value) || undefined,
+    day: getDate(value as Date) || undefined,
+    month: getMonth(value as Date) + 1 || undefined,
+    year: getYear(value as Date) || undefined,
   });
 
   useEffect(() => {
     if (!onChange) return;
     const { day, month, year } = parsedValues;
+    if (
+      day === getDate(value as Date) &&
+      month === getMonth(value as Date) + 1 &&
+      year === getYear(value as Date)
+    ) {
+      return;
+    }
     if (day === undefined || month === undefined || year === undefined) return onChange(undefined);
     if (isValid(day, month, year)) return onChange(new Date(year, month - 1, day));
     return onChange(undefined);
@@ -72,9 +79,17 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   };
 
   return (
-    <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`}>
-      {label && <LabelComponent className={`${BASE_CLASS}__label`}>{label}</LabelComponent>}
-      <div onBlur={handleGroupBlur} className={`${BASE_CLASS}__inputs-wrapper`}>
+    <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`} data-testid={BASE_CLASS}>
+      {label && (
+        <LabelComponent className={`${BASE_CLASS}__label`} data-testid={`${BASE_CLASS}__label`}>
+          {label}
+        </LabelComponent>
+      )}
+      <div
+        onBlur={handleGroupBlur}
+        className={`${BASE_CLASS}__inputs-wrapper`}
+        data-testid={`${BASE_CLASS}__inputs-wrapper`}
+      >
         <InputComponent
           type="text"
           pattern="[0-9]*"
@@ -82,6 +97,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.day)}
           value={parsedValues.day || ''}
           className={`${BASE_CLASS}__day`}
+          data-testid={`${BASE_CLASS}__day`}
           ref={dayInputRef}
           disabled={disabled}
         />
@@ -92,6 +108,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.month)}
           value={parsedValues.month || ''}
           className={`${BASE_CLASS}__month`}
+          data-testid={`${BASE_CLASS}__month`}
           ref={monthInputRef}
           disabled={disabled}
         />
@@ -102,6 +119,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.year)}
           value={parsedValues.year || ''}
           className={`${BASE_CLASS}__year`}
+          data-testid={`${BASE_CLASS}__year`}
           ref={yearInputRef}
           disabled={disabled}
         />

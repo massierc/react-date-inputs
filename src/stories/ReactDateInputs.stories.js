@@ -39,7 +39,7 @@ storiesOf('React Date Inputs', module)
     return <DateInputs value={value} onChange={setValue} label="Date" />;
   })
   .add('With Initial Value', () => {
-    const [value, setValue] = useState(new Date());
+    const [value, setValue] = useState(new Date(2020, 3, 20));
 
     return <DateInputs value={value} onChange={setValue} label="Date" />;
   })

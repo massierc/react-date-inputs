@@ -1,8 +1,7 @@
 module.exports = {
-  transform: {
-    '.(ts|tsx)': 'ts-jest',
-  },
-  testPathIgnorePatterns: ['/node_modules/', '/lib/'],
-  testRegex: '(/test/.*|\\.(test|spec))\\.(ts|tsx|js)$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  roots: ['<rootDir>/src'],
+  transform: { '^.+\\.tsx?$': 'ts-jest' },
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
