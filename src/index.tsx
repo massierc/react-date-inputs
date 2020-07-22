@@ -5,6 +5,12 @@ import { daysInMonth, isValid, getCappedUnits } from './utils/date';
 
 const BASE_CLASS = 'react-date-inputs';
 
+const DefaultInputComponent = React.forwardRef((props: any, ref: React.Ref<HTMLInputElement>) => (
+  <input {...props} ref={ref} />
+));
+
+DefaultInputComponent.displayName = 'DefaultInputComponent';
+
 const DateInputs: React.FC<DateInputsProps> = ({
   value,
   onChange,
@@ -15,6 +21,7 @@ const DateInputs: React.FC<DateInputsProps> = ({
   className,
   label,
   disabled,
+  inputComponent: InputComponent = DefaultInputComponent,
 }: DateInputsProps) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
@@ -65,31 +72,31 @@ const DateInputs: React.FC<DateInputsProps> = ({
     <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`}>
       {label && <label className={`${BASE_CLASS}__label`}>{label}</label>}
       <div onBlur={handleGroupBlur} className={`${BASE_CLASS}__inputs-wrapper`}>
-        <input
+        <InputComponent
           type="text"
           pattern="[0-9]*"
           placeholder={dayPlaceholder || 'DD'}
-          onChange={(e) => handleChange(e, Unit.day)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.day)}
           value={parsedValues.day || ''}
           className={`${BASE_CLASS}__day`}
           ref={dayInputRef}
           disabled={disabled}
         />
-        <input
+        <InputComponent
           type="text"
           pattern="[0-9]*"
           placeholder={monthPlaceholder || 'MM'}
-          onChange={(e) => handleChange(e, Unit.month)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.month)}
           value={parsedValues.month || ''}
           className={`${BASE_CLASS}__month`}
           ref={monthInputRef}
           disabled={disabled}
         />
-        <input
+        <InputComponent
           type="text"
           pattern="[0-9]*"
           placeholder={yearPlaceholder || 'YYYY'}
-          onChange={(e) => handleChange(e, Unit.year)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.year)}
           value={parsedValues.year || ''}
           className={`${BASE_CLASS}__year`}
           ref={yearInputRef}

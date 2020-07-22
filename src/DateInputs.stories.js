@@ -36,3 +36,25 @@ export const WithInitialValue = () => {
 export const Disabled = () => {
   return <DateInputs label="Date" value={null} disabled />;
 };
+
+const CustomInputComponent = React.forwardRef((props, ref) => {
+  return <input style={{ background: 'yellow' }} {...props} ref={ref} />;
+});
+
+CustomInputComponent.displayName = 'CustomInputComponent';
+
+export const WithCustomInput = () => {
+  const [value, setValue] = useState();
+
+  return (
+    <>
+      <DateInputs
+        value={value}
+        onChange={setValue}
+        label="Date"
+        inputComponent={CustomInputComponent}
+      />
+      <p>{`value: ${value}`}</p>
+    </>
+  );
+};
