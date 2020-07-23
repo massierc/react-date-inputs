@@ -2,7 +2,7 @@
   "name": "react-date-inputs",
   "version": "1.0.0",
   "description": "Simple date inputs for React",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -10,7 +10,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "tsc -p .",
-    "watch": "tsc -p . -w"
+    "watch": "tsc -p . -w",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,10 @@
     "inputs",
     "datepicker",
     "input"
+  ],
+  "files": [
+    "src/",
+    "dist/"
   ],
   "author": "massierc",
   "license": "ISC",
