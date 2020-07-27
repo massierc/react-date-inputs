@@ -1,6 +1,6 @@
-# React Date Inputs `🚧 WIP 🚧`
+# React Date Inputs
 
-React Date Inputs provides simple date inputs for your React app.
+Simple and lightweight date inputs for your React app.
 
 ## Installation
 
@@ -19,14 +19,36 @@ yarn add react-date-inputs
 ## Usage
 
 ```javascript
+import React, { useState } from 'react';
 import ReactDateInputs from 'react-date-inputs';
 
-const MyDateComponent = ({ handleChange }) => {
+const MyComponent = () => {
+  const [value, setValue] = useState(new Date());
+
   return (
-    <ReactDateInputs onChange={handleChange} />
+    <ReactDateInputs value={value} onChange={setValue} />
   )
 };
 ```
+
+## Props
+
+prop | type | required | default | description
+|-|-|-|-|-|
+value | `Date` | - | - |
+onChange | `(value: Date): undefined` | - | - |
+onBlur | `(): undefined` | - | - |
+dayPlaceholder | `string` | - | `'DD'` |
+monthPlaceholder | `string` | - | `'MM'` |
+yearPlaceholder | `string` | - | `'YYYY'` |
+className | `string` | - | - |
+label | `string` | - | - |
+disabled | `boolean` | - | `false` | 
+inputComponent | `React.ReactType` | - | - | Component used for inputs. Must use `React.forwardRef` for functional components
+labelComponent | `React.ReactType` | - | - | Component used for label
+show | `string[]` | - | `['day', 'month', 'year']` | Determines which inputs to show
+
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
