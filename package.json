@@ -1,6 +1,6 @@
 {
   "name": "react-date-inputs",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Simple date inputs for React",
   "main": "dist/index.js",
   "scripts": {

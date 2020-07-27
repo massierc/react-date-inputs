@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/massierc/react-date-inputs/compare/v1.4.0...v1.4.1) (2020-07-27)
+
+
+### Bug Fixes
+
+* allow partial inputs (e.g. only month and year) ([c3f06c2](https://github.com/massierc/react-date-inputs/commit/c3f06c20062511e69e981797aa368c2c5e71978a))
+
 ## 1.4.0 (2020-07-23)
 
 
