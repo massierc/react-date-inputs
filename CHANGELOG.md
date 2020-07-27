@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/massierc/react-date-inputs/compare/v1.4.1...v1.4.2) (2020-07-27)
+
+
+### Bug Fixes
+
+* update README ([ccf3ed6](https://github.com/massierc/react-date-inputs/commit/ccf3ed68436523b6e84d3ee811d5c79eaa9ddb40))
+
 ### [1.4.1](https://github.com/massierc/react-date-inputs/compare/v1.4.0...v1.4.1) (2020-07-27)
 
 
