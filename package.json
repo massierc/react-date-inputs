@@ -12,7 +12,7 @@
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
     "release": "standard-version",
-    "publish": "git push --follow-tags origin master && npm publish"
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
