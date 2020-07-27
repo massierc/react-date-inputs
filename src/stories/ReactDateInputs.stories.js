@@ -38,7 +38,7 @@ storiesOf('React Date Inputs', module)
 
     return <DateInputs value={value} onChange={setValue} label="Date" />;
   })
-  .add('With Initial Value', () => {
+  .add('With initial value', () => {
     const [value, setValue] = useState(new Date(2020, 3, 20));
 
     return <DateInputs value={value} onChange={setValue} label="Date" />;
@@ -46,7 +46,7 @@ storiesOf('React Date Inputs', module)
   .add('Disabled', () => {
     return <DateInputs value={new Date()} label="Date" disabled />;
   })
-  .add('With Custom Components', () => {
+  .add('With custom components', () => {
     const [value, setValue] = useState();
 
     return (
@@ -58,4 +58,19 @@ storiesOf('React Date Inputs', module)
         labelComponent={CustomLabelComponent}
       />
     );
+  })
+  .add('Only month and year', () => {
+    const [value, setValue] = useState();
+
+    return <DateInputs value={value} onChange={setValue} show={['month', 'year']} />;
+  })
+  .add('Only year', () => {
+    const [value, setValue] = useState();
+
+    return <DateInputs value={value} onChange={setValue} show={['year']} />;
+  })
+  .add('Only day and month', () => {
+    const [value, setValue] = useState();
+
+    return <DateInputs value={value} onChange={setValue} show={['day', 'month']} />;
   });
