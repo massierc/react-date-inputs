@@ -48,10 +48,15 @@ export const DateInputs: React.FC<DateInputsProps> = ({
       month === getMonth(value as Date) + 1 &&
       year === getYear(value as Date);
 
-    if (!onChange || isInitial) return;
-    if (day === undefined || month === undefined || year === undefined) return onChange(undefined);
-    if (isValid(day, month, year)) return onChange(new Date(year, month - 1, day));
-    return onChange(undefined);
+    if (onChange && !isInitial) {
+      if (day === undefined || month === undefined || year === undefined) {
+        onChange(undefined);
+      } else if (isValid(day, month, year)) {
+        onChange(new Date(year, month - 1, day));
+      } else {
+        onChange(undefined);
+      }
+    }
   }, [parsedValues]);
 
   const handleFocus = ({ day, month, year }: DateUnits, inputId: Unit) => {
