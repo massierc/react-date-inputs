@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.5](https://github.com/massierc/react-date-inputs/compare/v1.4.4...v1.4.5) (2020-07-28)
+
+
+### Docs
+
+* deploy storybook to gh pages ([6c574ec](https://github.com/massierc/react-date-inputs/commit/6c574ec96a22ba3c1dd5d8aa4f6dd146e345ca83))
+
 ### [1.4.4](https://github.com/massierc/react-date-inputs/compare/v1.4.3...v1.4.4) (2020-07-27)
 
 ### [1.4.3](https://github.com/massierc/react-date-inputs/compare/v1.4.2...v1.4.3) (2020-07-27)
