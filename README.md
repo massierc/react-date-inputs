@@ -2,6 +2,8 @@
 
 Simple and lightweight date inputs for your React app.
 
+[View demo](https://massierc.github.io/react-date-inputs/)
+
 ## Installation
 
 Install with npm

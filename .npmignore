@@ -63,3 +63,4 @@ typings/
 .eslintrc.js
 .prettierrc.js
 jest.config.js
+.storybook-static/
