@@ -4,7 +4,7 @@ import { DateUnits } from '../types';
 export function daysInMonth(month: number, year?: number): number {
   switch (month) {
     case 2:
-      return year && ((year % 4 == 0 && year % 100) || year % 400 == 0) ? 29 : 28;
+      return !year ? 29 : (year % 4 == 0 && year % 100) || year % 400 == 0 ? 29 : 28;
     case 9:
     case 4:
     case 6:
