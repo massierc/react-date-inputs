@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.9](https://github.com/massierc/react-date-inputs/compare/v1.4.8...v1.4.9) (2020-08-18)
+
+
+### Bug Fixes
+
+* pass event in onBlur callback ([7b56732](https://github.com/massierc/react-date-inputs/commit/7b56732b9ac13d201cf1c7a9b8430ec7ae9d0af6))
+
 ### [1.4.8](https://github.com/massierc/react-date-inputs/compare/v1.4.7...v1.4.8) (2020-08-18)
 
 
