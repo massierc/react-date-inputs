@@ -1,7 +1,7 @@
 export interface DateInputsProps {
   value?: Date;
   onChange?(value?: Date): undefined;
-  onBlur?(): undefined;
+  onBlur?(e: React.ChangeEvent): undefined;
   dayPlaceholder?: string;
   monthPlaceholder?: string;
   yearPlaceholder?: string;

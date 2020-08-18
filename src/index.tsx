@@ -83,7 +83,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
         const cappedValues: DateUnits = getCappedUnits(parsedValues);
 
         setParsedValues(cappedValues);
-        onBlur && onBlur();
+        onBlur && onBlur(e);
       }
     }, 0);
   };
