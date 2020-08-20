@@ -54,7 +54,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     if (onChange && !isInitial) {
       if (day === undefined || month === undefined || year === undefined) {
         onChange(undefined);
-      } else if (isValid(day, month, year)) {
+      } else if (isValid(day, month, year) && year.toString().length === 4) {
         onChange(new Date(year, month - 1, day));
       } else {
         onChange(undefined);
