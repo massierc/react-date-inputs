@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/massierc/react-date-inputs/compare/v1.5.0...v1.5.1) (2020-08-20)
+
+
+### Bug Fixes
+
+* handle capped values in onChange instead of onBlur ([d9f7a77](https://github.com/massierc/react-date-inputs/commit/d9f7a7701dc6a562ce925160289fead5f8fd72ae))
+
 ## [1.5.0](https://github.com/massierc/react-date-inputs/compare/v1.4.9...v1.5.0) (2020-08-20)
 
 
