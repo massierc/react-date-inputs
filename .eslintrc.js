@@ -43,6 +43,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'lines-between-class-members': [2, 'always', { exceptAfterSingleLine: true }],
     'no-useless-constructor': 0,
+    'react/prop-types': 0,
   },
   overrides: [
     {

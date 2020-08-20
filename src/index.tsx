@@ -25,7 +25,10 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   disabled = false,
   inputComponent: InputComponent = DefaultInputComponent,
   labelComponent: LabelComponent = DefaultLabelComponent,
+  inputComponentProps = {},
+  labelComponentProps = {},
   show = [Unit.day, Unit.month, Unit.year],
+  autoTab = false,
 }: DateInputsProps) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
@@ -71,7 +74,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     const newUnitValue: number | undefined = val >= 0 ? val : undefined;
     const newParsedValues: DateUnits = { ...parsedValues, [inputId]: newUnitValue };
 
-    handleFocus(newParsedValues, inputId);
+    if (autoTab) handleFocus(newParsedValues, inputId);
     setParsedValues(newParsedValues);
   };
 
@@ -91,7 +94,11 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   return (
     <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`} data-testid={BASE_CLASS}>
       {label && (
-        <LabelComponent className={`${BASE_CLASS}__label`} data-testid={`${BASE_CLASS}__label`}>
+        <LabelComponent
+          className={`${BASE_CLASS}__label`}
+          data-testid={`${BASE_CLASS}__label`}
+          {...labelComponentProps}
+        >
           {label}
         </LabelComponent>
       )}
@@ -111,6 +118,8 @@ export const DateInputs: React.FC<DateInputsProps> = ({
             data-testid={`${BASE_CLASS}__day`}
             ref={dayInputRef}
             disabled={disabled}
+            maxLength="2"
+            {...inputComponentProps}
           />
         )}
         {show.includes(Unit.month) && (
@@ -124,6 +133,8 @@ export const DateInputs: React.FC<DateInputsProps> = ({
             data-testid={`${BASE_CLASS}__month`}
             ref={monthInputRef}
             disabled={disabled}
+            maxLength="2"
+            {...inputComponentProps}
           />
         )}
         {show.includes(Unit.year) && (
@@ -137,6 +148,8 @@ export const DateInputs: React.FC<DateInputsProps> = ({
             data-testid={`${BASE_CLASS}__year`}
             ref={yearInputRef}
             disabled={disabled}
+            maxLength="4"
+            {...inputComponentProps}
           />
         )}
       </div>

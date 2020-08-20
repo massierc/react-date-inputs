@@ -10,7 +10,10 @@ export interface DateInputsProps {
   disabled?: boolean;
   inputComponent?: React.ReactType;
   labelComponent?: React.ReactType;
+  inputComponentProps?: Record<string, unknown>;
+  labelComponentProps?: Record<string, unknown>;
   show?: string[];
+  autoTab?: boolean;
 }
 
 export enum Unit {

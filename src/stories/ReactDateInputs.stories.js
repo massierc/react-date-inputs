@@ -5,13 +5,7 @@ import DateInputs from '../index.tsx';
 import './styles.css';
 
 const CustomInputComponent = React.forwardRef((props, ref) => {
-  return (
-    <input
-      style={{ padding: '6px', marginRight: '4px', marginTop: '0.2rem' }}
-      {...props}
-      ref={ref}
-    />
-  );
+  return <input style={props.style} {...props} ref={ref} />;
 });
 
 CustomInputComponent.displayName = 'CustomInputComponent';
@@ -46,6 +40,11 @@ storiesOf('React Date Inputs', module)
   .add('Disabled', () => {
     return <DateInputs value={new Date()} label="Date" disabled />;
   })
+  .add('With auto tab', () => {
+    const [value, setValue] = useState();
+
+    return <DateInputs value={value} onChange={setValue} label="Date" autoTab />;
+  })
   .add('With custom components', () => {
     const [value, setValue] = useState();
 
@@ -56,6 +55,13 @@ storiesOf('React Date Inputs', module)
         label="Date"
         inputComponent={CustomInputComponent}
         labelComponent={CustomLabelComponent}
+        inputComponentProps={{
+          style: {
+            padding: '6px',
+            marginRight: '4px',
+            marginTop: '0.2rem',
+          },
+        }}
       />
     );
   })
