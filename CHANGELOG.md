@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/massierc/react-date-inputs/compare/v1.4.9...v1.5.0) (2020-08-20)
+
+
+### Features
+
+* make autoTab optional. set maxlength on inputs ([932c52c](https://github.com/massierc/react-date-inputs/commit/932c52c781d359c883941f5b986fb975b27b12e4))
+
+
+### Bug Fixes
+
+* forbid 2 digit year. TODO: YY handling ([50f1f2b](https://github.com/massierc/react-date-inputs/commit/50f1f2bb6cbc1893d1517e5ee3f170dc00eb88f2))
+
 ### [1.4.9](https://github.com/massierc/react-date-inputs/compare/v1.4.8...v1.4.9) (2020-08-18)
 
 
