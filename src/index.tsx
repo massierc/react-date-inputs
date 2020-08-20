@@ -73,21 +73,17 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     const val = parseInt(e.target.value, 10);
     const newUnitValue: number | undefined = val >= 0 ? val : undefined;
     const newParsedValues: DateUnits = { ...parsedValues, [inputId]: newUnitValue };
+    const cappedValues: DateUnits = getCappedUnits(newParsedValues);
 
     if (autoTab) handleFocus(newParsedValues, inputId);
-    setParsedValues(newParsedValues);
+    setParsedValues(cappedValues);
   };
 
   const handleGroupBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
     const { currentTarget } = e;
 
     setTimeout(() => {
-      if (!currentTarget.contains(document.activeElement)) {
-        const cappedValues: DateUnits = getCappedUnits(parsedValues);
-
-        setParsedValues(cappedValues);
-        onBlur && onBlur(e);
-      }
+      if (!currentTarget.contains(document.activeElement)) onBlur && onBlur(e);
     }, 0);
   };
 
