@@ -1,7 +1,7 @@
-import { default as React, useRef, useEffect, useState } from 'react';
+import { default as React, useEffect, useRef, useState } from 'react';
 import { getDate, getMonth, getYear } from 'date-fns';
-import { DateInputsProps, Unit, DateUnits } from './types';
-import { daysInMonth, isValid, getCappedUnits } from './utils/date';
+import { DateInputsProps, DateUnits, Unit } from './types';
+import { daysInMonth, getCappedUnits, isValid } from './utils/date';
 
 export const BASE_CLASS = 'react-date-inputs';
 
@@ -87,6 +87,30 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     }, 0);
   };
 
+  const refs = {
+    [Unit.day]: dayInputRef,
+    [Unit.month]: monthInputRef,
+    [Unit.year]: yearInputRef,
+  };
+
+  const placeholders = {
+    [Unit.day]: dayPlaceholder,
+    [Unit.month]: monthPlaceholder,
+    [Unit.year]: yearPlaceholder,
+  };
+
+  const getValue = (unit: Unit) => {
+    switch (unit) {
+      case Unit.day:
+        return (parsedValues.day ?? '') as string;
+      case Unit.month:
+        return (parsedValues.month ?? '') as string;
+      case Unit.year:
+        return (parsedValues.year ?? '') as string;
+    }
+    return '';
+  };
+
   return (
     <div className={`${BASE_CLASS}${className ? ` ${className}` : ''}`} data-testid={BASE_CLASS}>
       {label && (
@@ -103,51 +127,22 @@ export const DateInputs: React.FC<DateInputsProps> = ({
         className={`${BASE_CLASS}__inputs-wrapper`}
         data-testid={`${BASE_CLASS}__inputs-wrapper`}
       >
-        {show.includes(Unit.day) && (
+        {(show as Unit[]).map((unit) => (
           <InputComponent
             type="text"
             pattern="[0-9]*"
-            placeholder={dayPlaceholder}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.day)}
-            value={parsedValues.day || ''}
-            className={`${BASE_CLASS}__day`}
-            data-testid={`${BASE_CLASS}__day`}
-            ref={dayInputRef}
+            key={unit}
+            placeholder={placeholders[unit]}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, unit)}
+            value={getValue(unit)}
+            className={`${BASE_CLASS}__${unit}`}
+            data-testid={`${BASE_CLASS}__${unit}`}
+            ref={refs[unit]}
             disabled={disabled}
-            maxLength="2"
+            maxLength={unit == Unit.year ? '4' : '2'}
             {...inputComponentProps}
           />
-        )}
-        {show.includes(Unit.month) && (
-          <InputComponent
-            type="text"
-            pattern="[0-9]*"
-            placeholder={monthPlaceholder}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.month)}
-            value={parsedValues.month || ''}
-            className={`${BASE_CLASS}__month`}
-            data-testid={`${BASE_CLASS}__month`}
-            ref={monthInputRef}
-            disabled={disabled}
-            maxLength="2"
-            {...inputComponentProps}
-          />
-        )}
-        {show.includes(Unit.year) && (
-          <InputComponent
-            type="text"
-            pattern="[0-9]*"
-            placeholder={yearPlaceholder}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, Unit.year)}
-            value={parsedValues.year || ''}
-            className={`${BASE_CLASS}__year`}
-            data-testid={`${BASE_CLASS}__year`}
-            ref={yearInputRef}
-            disabled={disabled}
-            maxLength="4"
-            {...inputComponentProps}
-          />
-        )}
+        ))}
       </div>
     </div>
   );
