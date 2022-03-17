@@ -65,8 +65,17 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   const handleFocus = ({ day, month, year }: DateUnits, inputId: Unit) => {
     const maxDays = month ? daysInMonth(month, year) : 31;
 
-    if (inputId === Unit.day && parseInt(day + '1', 10) > maxDays) monthInputRef.current?.select();
-    if (inputId === Unit.month && parseInt(month + '1', 10) > 12) yearInputRef.current?.select();
+    const goToNext =
+      (inputId === Unit.day && parseInt(day + '1', 10) > maxDays) ||
+      (inputId === Unit.month && parseInt(month + '1', 10) > 12);
+
+    if (goToNext) {
+      const currentIndex = show?.indexOf(inputId);
+      const nextRef = show?.length > currentIndex + 1 ? refs[show[currentIndex + 1]] : undefined;
+      if (nextRef) {
+        nextRef.current.select();
+      }
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, inputId: Unit) => {
