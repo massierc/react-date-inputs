@@ -1,6 +1,6 @@
 export interface DateInputsProps {
   value?: Date;
-  onChange?(value?: Date): undefined;
+  onChange?(value?: Date): void;
   onBlur?(e: React.ChangeEvent): undefined;
   dayPlaceholder?: string;
   monthPlaceholder?: string;
@@ -8,8 +8,8 @@ export interface DateInputsProps {
   className?: string;
   label?: string;
   disabled?: boolean;
-  inputComponent?: React.ReactType;
-  labelComponent?: React.ReactType;
+  inputComponent?: React.ElementType;
+  labelComponent?: React.ElementType;
   inputComponentProps?: Record<string, unknown>;
   labelComponentProps?: Record<string, unknown>;
   show?: string[];

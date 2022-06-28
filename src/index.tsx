@@ -5,13 +5,12 @@ import { daysInMonth, isValid, getCappedUnits } from './utils/date';
 
 export const BASE_CLASS = 'react-date-inputs';
 
-const DefaultInputComponent = React.forwardRef((props: any, ref: React.Ref<HTMLInputElement>) => (
+const DefaultInputComponent = React.forwardRef<HTMLInputElement>((props, ref) => (
   <input {...props} ref={ref} />
 ));
-
 DefaultInputComponent.displayName = 'DefaultInputComponent';
 
-const DefaultLabelComponent = (props: any) => <label {...props} />;
+const DefaultLabelComponent = (props: React.HTMLProps<HTMLLabelElement>) => <label {...props} />;
 
 export const DateInputs: React.FC<DateInputsProps> = ({
   value,
@@ -29,7 +28,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   labelComponentProps = {},
   show = [Unit.day, Unit.month, Unit.year],
   autoTab = false,
-}: DateInputsProps) => {
+}) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
