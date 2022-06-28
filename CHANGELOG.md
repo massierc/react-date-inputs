@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/massierc/react-date-inputs/compare/v1.5.1...v1.5.2) (2022-06-28)
+
+
+### Code Refactoring
+
+* implement storybook csf ([a3ce3ca](https://github.com/massierc/react-date-inputs/commit/a3ce3cab6a6fcb7c557bcee4da00a79839a69570))
+
+
+### Others
+
+* bulk upgrade ([64a4558](https://github.com/massierc/react-date-inputs/commit/64a4558a9a9f19ea96e7e0c1944d5f6a52205f04))
+* **deps:** bump elliptic from 6.5.3 to 6.5.4 ([41ad98e](https://github.com/massierc/react-date-inputs/commit/41ad98ee865496f1fd8acab848871768534152d9))
+* **deps:** bump ini from 1.3.5 to 1.3.8 ([b486717](https://github.com/massierc/react-date-inputs/commit/b4867175f658a3cd55ca07f8bb62113902c3acf2))
+* **deps:** bump nested-object-assign from 1.0.3 to 1.0.4 ([3c4ceb6](https://github.com/massierc/react-date-inputs/commit/3c4ceb65bae216e5580fa2cc8c3557515bf1467f))
+* **deps:** bump ssri from 6.0.1 to 6.0.2 ([663f0d9](https://github.com/massierc/react-date-inputs/commit/663f0d9fca1a8a5a070f04bc6c8c9a80b0123e88))
+* **deps:** bump y18n from 4.0.0 to 4.0.1 ([6e6c812](https://github.com/massierc/react-date-inputs/commit/6e6c812597406f21095068913c5c72f0bf5da728))
+* stricter typing ([662c08f](https://github.com/massierc/react-date-inputs/commit/662c08fa2bf030c115a35ddfc9cfedd927f50be6))
+* ts skipLibCheck ([663685f](https://github.com/massierc/react-date-inputs/commit/663685f2b9e19255acfa7236efaed8414de3bfbf))
+* upgrade eslint ([aae505d](https://github.com/massierc/react-date-inputs/commit/aae505d70b4567aa1e78a29ec6a4cbf93222eaab))
+* upgrade husky to v8 ([8f3062b](https://github.com/massierc/react-date-inputs/commit/8f3062b7ce8b635b837f8779da3595e0386ef2d5))
+
 ### [1.5.1](https://github.com/massierc/react-date-inputs/compare/v1.5.0...v1.5.1) (2020-08-20)
 
 
