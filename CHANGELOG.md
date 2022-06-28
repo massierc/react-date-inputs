@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.4](https://github.com/massierc/react-date-inputs/compare/v1.5.3...v1.5.4) (2022-06-28)
+
+
+### Bug Fixes
+
+* remove recursive call to npm publish ([5ade56f](https://github.com/massierc/react-date-inputs/commit/5ade56f547f6bc6cec4bb4a49b736e2c68d1b473))
+
 ### [1.5.3](https://github.com/massierc/react-date-inputs/compare/v1.5.2...v1.5.3) (2022-06-28)
 
 
