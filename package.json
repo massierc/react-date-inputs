@@ -13,8 +13,7 @@
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
     "release": "standard-version",
-    "prepublishOnly": "npm run build",
-    "publish": "npm publish"
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
