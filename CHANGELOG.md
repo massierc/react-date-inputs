@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.3](https://github.com/massierc/react-date-inputs/compare/v1.5.2...v1.5.3) (2022-06-28)
+
+
+### Others
+
+* bump to 1.5.3 ([4f881ae](https://github.com/massierc/react-date-inputs/commit/4f881ae36addce523776ae66a8820e8fda19cd02))
+
 ### [1.5.2](https://github.com/massierc/react-date-inputs/compare/v1.5.1...v1.5.2) (2022-06-28)
 
 
