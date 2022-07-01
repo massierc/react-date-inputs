@@ -12,7 +12,7 @@ export interface DateInputsProps {
   labelComponent?: React.ElementType;
   inputComponentProps?: Record<string, unknown>;
   labelComponentProps?: Record<string, unknown>;
-  show?: Unit[];
+  show?: (keyof typeof Unit)[];
   autoTab?: boolean;
 }
 

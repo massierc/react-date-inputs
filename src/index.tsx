@@ -26,7 +26,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   labelComponent: LabelComponent = DefaultLabelComponent,
   inputComponentProps = {},
   labelComponentProps = {},
-  show = [Unit.day, Unit.month, Unit.year],
+  show = ['day', 'month', 'year'],
   autoTab = false,
 }) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
@@ -74,7 +74,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     }
   }, [parsedValues]);
 
-  const handleAutoFocus = ({ day, month, year }: DateUnits, unit: Unit) => {
+  const handleAutoFocus = ({ day, month, year }: DateUnits, unit: keyof typeof Unit) => {
     const maxDays = month ? daysInMonth(month, year) : 31;
 
     const currentIndex = show.indexOf(unit);
@@ -90,7 +90,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     if (goToNext) refs[nextUnit].current?.select();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, unit: Unit) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, unit: keyof typeof Unit) => {
     const val = parseInt(e.target.value, 10);
     const newUnitValue: number | undefined = val >= 0 ? val : undefined;
     const newParsedValues: DateUnits = { ...parsedValues, [unit]: newUnitValue };
@@ -124,22 +124,24 @@ export const DateInputs: React.FC<DateInputsProps> = ({
         className={`${BASE_CLASS}__inputs-wrapper`}
         data-testid={`${BASE_CLASS}__inputs-wrapper`}
       >
-        {show.map((unit) => (
-          <InputComponent
-            type="text"
-            pattern="[0-9]*"
-            key={unit}
-            placeholder={placeholders[unit]}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, unit)}
-            value={parsedValues[unit] ?? ''}
-            className={`${BASE_CLASS}__${unit}`}
-            data-testid={`${BASE_CLASS}__${unit}`}
-            ref={refs[unit]}
-            disabled={disabled}
-            maxLength={unit == Unit.year ? '4' : '2'}
-            {...inputComponentProps}
-          />
-        ))}
+        {show.map((unit) => {
+          return (
+            <InputComponent
+              type="text"
+              pattern="[0-9]*"
+              key={unit}
+              placeholder={placeholders[unit]}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, unit)}
+              value={parsedValues[unit] ?? ''}
+              className={`${BASE_CLASS}__${unit}`}
+              data-testid={`${BASE_CLASS}__${unit}`}
+              ref={refs[unit]}
+              disabled={disabled}
+              maxLength={unit == Unit.year ? '4' : '2'}
+              {...inputComponentProps}
+            />
+          );
+        })}
       </div>
     </div>
   );

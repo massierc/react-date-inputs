@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import DateInputs from '../index';
-import { Unit } from '../types';
 import './styles.css';
 
 export default {
@@ -49,13 +48,14 @@ PrePopulated.args = {
 };
 
 export const CustomInputOrder = Template.bind({});
+const show = ['year', 'month', 'day'];
 CustomInputOrder.argTypes = {
   ...Simple.argTypes,
-  show: ['year', 'month', 'day'],
+  show,
 };
 CustomInputOrder.args = {
   ...Simple.args,
-  show: [Unit.year, Unit.month, Unit.day],
+  show,
 };
 
 export const WithCustomComponents = Template.bind({});
