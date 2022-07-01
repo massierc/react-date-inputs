@@ -133,4 +133,17 @@ describe('<DateInputs />', () => {
 
     expect(monthInput).toHaveValue('12');
   });
+
+  test('should allow custom input ordering', async () => {
+    const onChange = jest.fn();
+    const { findByTestId } = render(
+      <DateInputs onChange={onChange} show={['year', 'month', 'day']} />
+    );
+
+    const inputsWrapper = await findByTestId(`${BASE_CLASS}__inputs-wrapper`);
+
+    expect(inputsWrapper.childNodes[0]).toHaveClass(`${BASE_CLASS}__year`);
+    expect(inputsWrapper.childNodes[1]).toHaveClass(`${BASE_CLASS}__month`);
+    expect(inputsWrapper.childNodes[2]).toHaveClass(`${BASE_CLASS}__day`);
+  });
 });
