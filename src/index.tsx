@@ -77,17 +77,17 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   const handleAutoFocus = ({ day, month, year }: DateUnits, unit: Unit) => {
     const maxDays = month ? daysInMonth(month, year) : 31;
 
+    const currentIndex = show.indexOf(unit);
+    const nextUnit = show[currentIndex + 1];
+
+    if (!nextUnit) return;
+
     const goToNext =
       (unit === Unit.day && parseInt(day + '1', 10) > maxDays) ||
-      (unit === Unit.month && parseInt(month + '1', 10) > 12);
+      (unit === Unit.month && parseInt(month + '1', 10) > 12) ||
+      (unit === Unit.year && year?.toString().length === 4);
 
-    if (goToNext) {
-      const currentIndex = show.indexOf(unit);
-      const nextUnit = show[currentIndex + 1];
-      const nextRef = show.length > currentIndex + 1 ? refs[nextUnit] : undefined;
-
-      if (nextRef) nextRef.current?.select();
-    }
+    if (goToNext) refs[nextUnit].current?.select();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, unit: Unit) => {
