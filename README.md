@@ -44,11 +44,11 @@ const MyComponent = () => {
 | className           | `string`                   | -        | -                          |
 | label               | `string`                   | -        | -                          |
 | disabled            | `boolean`                  | -        | `false`                    |
-| inputComponent      | `React.ReactType`          | -        | -                          | Component used for inputs. Must use `React.forwardRef` for functional components                                |
-| labelComponent      | `React.ReactType`          | -        | -                          | Component used for label                                                                                        |
+| inputComponent      | `React.ElementType`          | -        | -                          | Component used for inputs. Must use `React.forwardRef` for functional components                                |
+| labelComponent      | `React.ElementType`          | -        | -                          | Component used for label                                                                                        |
 | inputComponentProps | `Record<string, unknown>`  | -        | `{}`                       | Any additional prop to be passed down to custom input component                                                 |
 | labelComponentProps | `Record<string, unknown>`  | -        | `{}`                       | Any additional prop to be passed down to custom label component                                                 |
-| show                | `string[]`                 | -        | `['day', 'month', 'year']` | Determines which inputs to show                                                                                 |
+| show                | `(keyof typeof Unit)[]`    | -        | `['day', 'month', 'year']` | Determines which inputs to show                                                                                 |
 | autoTab             | `boolean`                  | -        | `false`                    | Enable automatic tab between inputs. If set to `true`, `inputComponent` must be wrapped in `React.forwardRef()` |
 
 ## Contributing
