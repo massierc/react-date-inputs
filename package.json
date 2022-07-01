@@ -1,6 +1,6 @@
 {
   "name": "react-date-inputs",
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "Simple date inputs for React",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,8 @@
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
     "release": "standard-version",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "deploy": "yarn release && npm publish && yarn deploy-storybook"
   },
   "repository": {
     "type": "git",

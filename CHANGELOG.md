@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/massierc/react-date-inputs/compare/v1.5.4...v1.6.0) (2022-07-01)
+
+
+### Features
+
+* **order:** made input display flexible based on show order ([e4d6771](https://github.com/massierc/react-date-inputs/commit/e4d67711782ef97f5a483a87d175f7cb3f20f5aa))
+
+
+### Bug Fixes
+
+* allow passing show as arr of keyof typeof Unit ([6478e0d](https://github.com/massierc/react-date-inputs/commit/6478e0d68845b1dc5686f31592a5ebaf68040ec0))
+* **autotab:** made autotab work with new loose order ([827042c](https://github.com/massierc/react-date-inputs/commit/827042cf40bdf2c1b89633bd62c14ae32c96b21e))
+* handleAutoFocus to handle year ([f65615f](https://github.com/massierc/react-date-inputs/commit/f65615f0798498d67dd55bb4660c9c548ca15af0))
+* use Unit as key in DateUnits ([512e8bc](https://github.com/massierc/react-date-inputs/commit/512e8bc32326a162fb956d2a500fe3d548c0fee6))
+
+
+### Code Refactoring
+
+* custom input order ([e811b03](https://github.com/massierc/react-date-inputs/commit/e811b0365fb6a58d58ee75ed9a4ef21564c9e8e8))
+
+
+### Tests
+
+* add story for custom input order ([013202e](https://github.com/massierc/react-date-inputs/commit/013202eb99523981261027e26535ddf8eefc2d6d))
+* add unit test for custom order input ([1ee417b](https://github.com/massierc/react-date-inputs/commit/1ee417b0eae249e31894a7b8efd99bef8713f134))
+
+
+### Others
+
+* .vscode ([16773d1](https://github.com/massierc/react-date-inputs/commit/16773d145dd762d72726cfdc159faf80e677bddc))
+* upgrade dev deps ([d4008fd](https://github.com/massierc/react-date-inputs/commit/d4008fd82c2fe74e4ae4455efcfb5c1bc75f819e))
+
+
+### Docs
+
+* update readme ([a9535c5](https://github.com/massierc/react-date-inputs/commit/a9535c5e5083beecd031702050542308ffc36b76))
+
 ### [1.5.4](https://github.com/massierc/react-date-inputs/compare/v1.5.3...v1.5.4) (2022-06-28)
 
 
