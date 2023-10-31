@@ -1,5 +1,4 @@
 import { isValid as isValidFns } from 'date-fns';
-import { DateUnits } from '../types';
 
 export function daysInMonth(month: number, year?: number): number {
   switch (month) {
@@ -22,6 +21,18 @@ export function daysInMonth(month: number, year?: number): number {
 export function isValid(day: number, month: number, year: number): boolean {
   const date = new Date(year, month - 1, day);
   return month >= 1 && month < 13 && day > 0 && day <= daysInMonth(month, year) && isValidFns(date);
+}
+
+export enum Unit {
+  day = 'day',
+  month = 'month',
+  year = 'year',
+}
+
+export interface DateUnits {
+  [Unit.day]?: number;
+  [Unit.month]?: number;
+  [Unit.year]?: number;
 }
 
 export function getCappedUnits({ day, month, year }: DateUnits): DateUnits {

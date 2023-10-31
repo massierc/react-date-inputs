@@ -1,18 +1,36 @@
-import { default as React, useEffect, useRef, useState } from 'react';
+import { forwardRef, HTMLProps, useEffect, useRef, useState } from 'react';
 import { getDate, getMonth, getYear } from 'date-fns';
-import { DateInputsProps, DateUnits, Unit } from './types';
-import { daysInMonth, getCappedUnits, isValid } from './utils/date';
+
+import { type DateUnits, daysInMonth, getCappedUnits, isValid, Unit } from 'src/utils/date';
 
 export const BASE_CLASS = 'react-date-inputs';
 
-const DefaultInputComponent = React.forwardRef<HTMLInputElement>((props, ref) => (
+const DefaultInputComponent = forwardRef<HTMLInputElement>((props, ref) => (
   <input {...props} ref={ref} />
 ));
 DefaultInputComponent.displayName = 'DefaultInputComponent';
 
-const DefaultLabelComponent = (props: React.HTMLProps<HTMLLabelElement>) => <label {...props} />;
+const DefaultLabelComponent = (props: HTMLProps<HTMLLabelElement>) => <label {...props} />;
 
-export const DateInputs: React.FC<DateInputsProps> = ({
+export interface DateInputsProps {
+  value?: Date;
+  onChange?(value?: Date): void;
+  onBlur?(e: React.ChangeEvent): undefined;
+  dayPlaceholder?: string;
+  monthPlaceholder?: string;
+  yearPlaceholder?: string;
+  className?: string;
+  label?: string;
+  disabled?: boolean;
+  inputComponent?: React.ElementType;
+  labelComponent?: React.ElementType;
+  inputComponentProps?: Record<string, unknown>;
+  labelComponentProps?: Record<string, unknown>;
+  show?: (keyof typeof Unit)[];
+  autoTab?: boolean;
+}
+
+export const DateInputs = ({
   value,
   onChange,
   onBlur,
@@ -28,7 +46,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   labelComponentProps = {},
   show = ['day', 'month', 'year'],
   autoTab = false,
-}) => {
+}: DateInputsProps) => {
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
@@ -46,9 +64,9 @@ export const DateInputs: React.FC<DateInputsProps> = ({
   };
 
   const [parsedValues, setParsedValues] = useState<DateUnits>({
-    [Unit.day]: getDate(value as Date) || undefined,
-    [Unit.month]: getMonth(value as Date) + 1 || undefined,
-    [Unit.year]: getYear(value as Date) || undefined,
+    [Unit.day]: getDate(value!) || undefined,
+    [Unit.month]: getMonth(value!) + 1 || undefined,
+    [Unit.year]: getYear(value!) || undefined,
   });
 
   useEffect(() => {
@@ -59,9 +77,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     } = parsedValues;
 
     const isInitial =
-      day === getDate(value as Date) &&
-      month === getMonth(value as Date) + 1 &&
-      year === getYear(value as Date);
+      day === getDate(value!) && month === getMonth(value!) + 1 && year === getYear(value!);
 
     if (onChange && !isInitial) {
       if (day === undefined || month === undefined || year === undefined) {
@@ -72,7 +88,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
         onChange(undefined);
       }
     }
-  }, [parsedValues]);
+  }, [parsedValues, onChange, show, value]);
 
   const handleAutoFocus = ({ day, month, year }: DateUnits, unit: keyof typeof Unit) => {
     const maxDays = month ? daysInMonth(month, year) : 31;
@@ -80,7 +96,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     const currentIndex = show.indexOf(unit);
     const nextUnit = show[currentIndex + 1];
 
-    if (!nextUnit) return;
+    // if (!nextUnit) return;
 
     const goToNext =
       (unit === Unit.day && parseInt(day + '1', 10) > maxDays) ||
@@ -104,7 +120,7 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     const { currentTarget } = e;
 
     setTimeout(() => {
-      if (!currentTarget.contains(document.activeElement)) onBlur && onBlur(e);
+      if (!currentTarget.contains(document.activeElement)) onBlur?.(e);
     }, 0);
   };
 
@@ -131,7 +147,9 @@ export const DateInputs: React.FC<DateInputsProps> = ({
               pattern="[0-9]*"
               key={unit}
               placeholder={placeholders[unit]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, unit)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                handleChange(e, unit);
+              }}
               value={parsedValues[unit] ?? ''}
               className={`${BASE_CLASS}__${unit}`}
               data-testid={`${BASE_CLASS}__${unit}`}
@@ -146,5 +164,3 @@ export const DateInputs: React.FC<DateInputsProps> = ({
     </div>
   );
 };
-
-export default DateInputs;

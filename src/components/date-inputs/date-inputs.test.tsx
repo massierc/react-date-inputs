@@ -1,84 +1,84 @@
-import * as React from 'react';
 import {
-  render,
   fireEvent,
+  render,
   //  fireEvent, waitForElement
 } from '@testing-library/react';
-import DateInputs, { BASE_CLASS } from '../index';
+
+import { BASE_CLASS, DateInputs } from './index';
 // import {DateInputsProps} from "../types";
 
 describe('<DateInputs />', () => {
   test('should display three blank inputs', async () => {
     const { findByTestId } = render(<DateInputs value={undefined} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
-    const monthInput = await findByTestId(`${BASE_CLASS}__month`);
-    const yearInput = await findByTestId(`${BASE_CLASS}__year`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
+    const monthInput = (await findByTestId(`${BASE_CLASS}__month`)) as HTMLInputElement;
+    const yearInput = (await findByTestId(`${BASE_CLASS}__year`)) as HTMLInputElement;
 
-    expect(dayInput).toHaveValue('');
-    expect(monthInput).toHaveValue('');
-    expect(yearInput).toHaveValue('');
+    expect(dayInput.value).toBe('');
+    expect(monthInput.value).toBe('');
+    expect(yearInput.value).toBe('');
   });
 
   test('should populate inputs with correct date', async () => {
     const date = new Date(2020, 3, 20);
     const { findByTestId } = render(<DateInputs value={date} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
-    const monthInput = await findByTestId(`${BASE_CLASS}__month`);
-    const yearInput = await findByTestId(`${BASE_CLASS}__year`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
+    const monthInput = (await findByTestId(`${BASE_CLASS}__month`)) as HTMLInputElement;
+    const yearInput = (await findByTestId(`${BASE_CLASS}__year`)) as HTMLInputElement;
 
-    expect(dayInput).toHaveValue('20');
-    expect(monthInput).toHaveValue('4');
-    expect(yearInput).toHaveValue('2020');
+    expect(dayInput.value).toBe('20');
+    expect(monthInput.value).toBe('4');
+    expect(yearInput.value).toBe('2020');
   });
 
   test('should not allow entering invalid characters', async () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
 
-    expect(dayInput).toHaveValue('');
+    expect(dayInput.value).toBe('');
     fireEvent.change(dayInput, { target: { value: 'no bueno!' } });
-    expect(dayInput).toHaveValue('');
+    expect(dayInput.value).toBe('');
   });
 
   test('should allow entering the day', async () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
 
     fireEvent.change(dayInput, { target: { value: '20' } });
-    expect(dayInput).toHaveValue('20');
+    expect(dayInput.value).toBe('20');
   });
 
   test('should allow entering the month', async () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const monthInput = await findByTestId(`${BASE_CLASS}__month`);
+    const monthInput = (await findByTestId(`${BASE_CLASS}__month`)) as HTMLInputElement;
 
     fireEvent.change(monthInput, { target: { value: '4' } });
-    expect(monthInput).toHaveValue('4');
+    expect(monthInput.value).toBe('4');
   });
 
   test('should allow entering the year', async () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const yearInput = await findByTestId(`${BASE_CLASS}__year`);
+    const yearInput = (await findByTestId(`${BASE_CLASS}__year`)) as HTMLInputElement;
 
     fireEvent.change(yearInput, { target: { value: '2020' } });
-    expect(yearInput).toHaveValue('2020');
+    expect(yearInput.value).toBe('2020');
   });
 
   test('should return undefined if one of the three inputs is empty', async () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
 
     fireEvent.change(dayInput, { target: { value: '20' } });
     expect(onChange).toHaveBeenCalledWith(undefined);
@@ -88,9 +88,9 @@ describe('<DateInputs />', () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
-    const monthInput = await findByTestId(`${BASE_CLASS}__month`);
-    const yearInput = await findByTestId(`${BASE_CLASS}__year`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
+    const monthInput = (await findByTestId(`${BASE_CLASS}__month`)) as HTMLInputElement;
+    const yearInput = (await findByTestId(`${BASE_CLASS}__year`)) as HTMLInputElement;
 
     fireEvent.change(dayInput, { target: { value: '20' } });
     expect(onChange).toHaveBeenCalledWith(undefined);
@@ -104,11 +104,11 @@ describe('<DateInputs />', () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
 
     fireEvent.change(dayInput, { target: { value: '50' } });
 
-    expect(dayInput).toHaveValue('31');
+    expect(dayInput.value).toBe('31');
   });
 
   test('should cap the days to the correct max amount if month and year are provided', async () => {
@@ -116,22 +116,22 @@ describe('<DateInputs />', () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} value={date} />);
 
-    const dayInput = await findByTestId(`${BASE_CLASS}__day`);
+    const dayInput = (await findByTestId(`${BASE_CLASS}__day`)) as HTMLInputElement;
 
     fireEvent.change(dayInput, { target: { value: '50' } });
 
-    expect(dayInput).toHaveValue('28');
+    expect(dayInput.value).toBe('28');
   });
 
   test('should cap the months to 12', async () => {
     const onChange = jest.fn();
     const { findByTestId } = render(<DateInputs onChange={onChange} />);
 
-    const monthInput = await findByTestId(`${BASE_CLASS}__month`);
+    const monthInput = (await findByTestId(`${BASE_CLASS}__month`)) as HTMLInputElement;
 
     fireEvent.change(monthInput, { target: { value: '50' } });
 
-    expect(monthInput).toHaveValue('12');
+    expect(monthInput.value).toBe('12');
   });
 
   test('should allow custom input ordering', async () => {
@@ -142,8 +142,10 @@ describe('<DateInputs />', () => {
 
     const inputsWrapper = await findByTestId(`${BASE_CLASS}__inputs-wrapper`);
 
-    expect(inputsWrapper.childNodes[0]).toHaveClass(`${BASE_CLASS}__year`);
-    expect(inputsWrapper.childNodes[1]).toHaveClass(`${BASE_CLASS}__month`);
-    expect(inputsWrapper.childNodes[2]).toHaveClass(`${BASE_CLASS}__day`);
+    expect((inputsWrapper.childNodes[0] as HTMLElement).className).toContain(`${BASE_CLASS}__year`);
+    expect((inputsWrapper.childNodes[1] as HTMLElement).className).toContain(
+      `${BASE_CLASS}__month`
+    );
+    expect((inputsWrapper.childNodes[2] as HTMLElement).className).toContain(`${BASE_CLASS}__day`);
   });
 });
