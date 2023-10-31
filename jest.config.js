@@ -1,8 +1,16 @@
 module.exports = {
-  roots: ['<rootDir>/src'],
-  transform: { '^.+\\.tsx?$': 'ts-jest' },
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  testMatch: ['<rootDir>/src/**/*.{spec,test}.{ts,tsx}'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!<rootDir>/src/types/**/*.ts'],
+  moduleNameMapper: {
+    '^src/(.*)$': '<rootDir>/src/$1',
+  },
   testEnvironment: 'jsdom',
+  globals: {
+    'ts-jest': {
+      diagnostics: false,
+      isolatedModules: true,
+    },
+  },
 };
