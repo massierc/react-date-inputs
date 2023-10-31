@@ -1,60 +1,85 @@
 module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es2020: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/strict-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2020,
+    ecmaVersion: 'latest',
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
   },
-  plugins: ['@typescript-eslint', 'prettier', 'import', 'unused-imports'],
+  plugins: ['react-refresh', 'prettier', 'simple-import-sort'],
+  rules: {
+    'prettier/prettier': 'warn',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    quotes: [
+      'warn',
+      'single',
+      {
+        avoidEscape: true,
+      },
+    ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'import/prefer-default-export': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
+    'react-refresh/only-export-components': [
+      'off',
+      {
+        allowConstantExport: true,
+      },
+    ],
+  },
   settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    typescript: {
-      alwaysTryTypes: true,
-    },
     react: {
       version: 'detect',
     },
   },
-  extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
-  rules: {
-    '@typescript-eslint/camelcase': 0,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    'import/extensions': 0,
-    'import/prefer-default-export': 0,
-    'import/default': 0,
-    'import/order': [
-      2,
-      {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        'newlines-between': 'never',
-      },
-    ],
-    'import/no-extraneous-dependencies': [2, { devDependencies: true }],
-    'unused-imports/no-unused-imports': 2,
-    'class-methods-use-this': 0,
-    'lines-between-class-members': [2, 'always', { exceptAfterSingleLine: true }],
-    'no-useless-constructor': 0,
-    'react/prop-types': 0,
-  },
   overrides: [
     {
-      files: ['*.js', '*.jsx'],
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // Side effect imports.
+              ['^\\u0000'],
+              // Packages `react` related packages come first.
+              ['^react', '^@?\\w'],
+              // Absolute imports.
+              ['^src'],
+              // Parent imports. Put `..` last.
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+            ],
+          },
+        ],
       },
     },
   ],
-  env: {
-    browser: true,
-    amd: true,
-    node: true,
-  },
 };

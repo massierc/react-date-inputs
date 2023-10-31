@@ -1,3 +1,14 @@
+!.*
+
+src/theme/scripts
+src/theme/generated
+src/theme/styled.d.ts
+
 dist
-.storybook
+coverage
 node_modules
+
+.eslintrc.js
+.storybook
+jest.config.js
+commitlint.config.js
