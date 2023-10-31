@@ -1,17 +1,11 @@
 {
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "eslint.alwaysShowStatus": true,
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "editor.formatOnSave": true,
+  "[typescript][typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
   },
-  "editor.formatOnSave": false,
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/*.code-search": true,
-    ".vscode/.react": true
-  }
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
