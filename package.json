@@ -13,9 +13,8 @@
     "test:watch": "jest --watch",
     "coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run generate-themes && npm run lint && rm -rf ./dist && npm run build",
+    "prepublishOnly": "npm run lint && rm -rf ./dist && npm run build",
     "prepare": "husky install",
-    "generate-themes": "npx ts-node -O '{\"module\":\"commonjs\"}' --project tsconfig.json src/theme/scripts/tokens/generate-themes.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "semantic-release": "HUSKY=0 semantic-release"
