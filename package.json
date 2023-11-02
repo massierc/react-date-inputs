@@ -17,7 +17,8 @@
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "semantic-release": "HUSKY=0 semantic-release"
+    "semantic-release": "HUSKY=0 semantic-release",
+    "chromatic": "npx chromatic --exit-zero-on-changes"
   },
   "repository": {
     "type": "git",
@@ -33,12 +34,14 @@
   "files": [
     "dist/"
   ],
-  "author": "massierc",
+  "author": {
+    "name": "massierc"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/massierc/react-date-inputs/issues"
   },
-  "homepage": "https://github.com/massierc/react-date-inputs#readme",
+  "homepage": "https://github.com/massierc/react-date-inputs",
   "dependencies": {
     "date-fns": "2.28.0"
   },
@@ -52,6 +55,7 @@
     "@storybook/addon-interactions": "^7.0.27",
     "@storybook/addon-links": "^7.0.27",
     "@storybook/blocks": "^7.0.27",
+    "@storybook/builder-vite": "^7.5.2",
     "@storybook/react": "^7.0.27",
     "@storybook/react-vite": "^7.0.27",
     "@storybook/testing-library": "^0.0.14-next.2",
@@ -66,6 +70,7 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.1",
     "c8": "^8.0.0",
+    "chromatic": "^7.6.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -99,5 +104,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "npm run lint:fix"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-date-inputs@1.7.0"
 }

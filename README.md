@@ -2,7 +2,7 @@
 
 Simple and lightweight date inputs for your React app.
 
-[View demo](https://massierc.github.io/react-date-inputs/)
+[View demo](https://65434ba9f8b51e9d1c907997-bdvvhckqeu.chromatic.com/)
 
 ## Installation
 
@@ -44,8 +44,8 @@ const MyComponent = () => {
 | className           | `string`                   | -        | -                          |
 | label               | `string`                   | -        | -                          |
 | disabled            | `boolean`                  | -        | `false`                    |
-| inputComponent      | `React.ElementType`          | -        | -                          | Component used for inputs. Must use `React.forwardRef` for functional components                                |
-| labelComponent      | `React.ElementType`          | -        | -                          | Component used for label                                                                                        |
+| inputComponent      | `React.ElementType`        | -        | -                          | Component used for inputs. Must use `React.forwardRef` for functional components                                |
+| labelComponent      | `React.ElementType`        | -        | -                          | Component used for label                                                                                        |
 | inputComponentProps | `Record<string, unknown>`  | -        | `{}`                       | Any additional prop to be passed down to custom input component                                                 |
 | labelComponentProps | `Record<string, unknown>`  | -        | `{}`                       | Any additional prop to be passed down to custom label component                                                 |
 | show                | `(keyof typeof Unit)[]`    | -        | `['day', 'month', 'year']` | Determines which inputs to show                                                                                 |

@@ -38,7 +38,7 @@ jspm_packages/
 
 # Distribution directories
 dist/
-.storybook-static/
+storybook-static/
 
 # Typescript v1 declaration files
 typings/
