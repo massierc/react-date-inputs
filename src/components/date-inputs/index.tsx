@@ -86,7 +86,8 @@ export const DateInputs = ({
       year = show.includes(Unit.year) ? undefined : 2020,
     } = parsedValues;  
 
-    if (isValid(day, month, year) && year.toString().length === 4) {
+    const valuesDefined = [day, month, year].every(value => typeof value !== "undefined");
+    if (valuesDefined && isValid(day, month, year) && year.toString().length === 4) {
       onChange(new Date(year, month - 1, day));
     } else {
       onChange(undefined);
