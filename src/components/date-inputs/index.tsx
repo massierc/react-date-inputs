@@ -50,6 +50,7 @@ export const DateInputs = ({
   const dayInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
+  const isFirstRenderRef = useRef(true);
 
   const refs = {
     [Unit.day]: dayInputRef,
@@ -70,23 +71,25 @@ export const DateInputs = ({
   });
 
   useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
+      return;
+    }
+
+    if (!onChange) {
+      return;
+    }
+    
     const {
       day = show.includes(Unit.day) ? undefined : 1,
       month = show.includes(Unit.month) ? undefined : 1,
       year = show.includes(Unit.year) ? undefined : 2020,
-    } = parsedValues;
+    } = parsedValues;  
 
-    const isInitial =
-      day === getDate(value!) && month === getMonth(value!) + 1 && year === getYear(value!);
-
-    if (onChange && !isInitial) {
-      if (day === undefined || month === undefined || year === undefined) {
-        onChange(undefined);
-      } else if (isValid(day, month, year) && year.toString().length === 4) {
-        onChange(new Date(year, month - 1, day));
-      } else {
-        onChange(undefined);
-      }
+    if (isValid(day, month, year) && year.toString().length === 4) {
+      onChange(new Date(year, month - 1, day));
+    } else {
+      onChange(undefined);
     }
   }, [parsedValues, onChange, show, value]);
 
