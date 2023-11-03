@@ -15,7 +15,7 @@ const DefaultLabelComponent = (props: HTMLProps<HTMLLabelElement>) => <label {..
 export interface DateInputsProps {
   value?: Date;
   onChange?(value?: Date): void;
-  onBlur?(e: React.ChangeEvent): undefined;
+  onBlur?(e: React.FocusEvent): void;
   dayPlaceholder?: string;
   monthPlaceholder?: string;
   yearPlaceholder?: string;
@@ -116,7 +116,7 @@ export const DateInputs = ({
     setParsedValues(cappedValues);
   };
 
-  const handleGroupBlur = (e: React.ChangeEvent<HTMLDivElement>) => {
+  const handleGroupBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const { currentTarget } = e;
 
     setTimeout(() => {
