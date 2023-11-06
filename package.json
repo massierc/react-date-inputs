@@ -99,8 +99,8 @@
     "vite-plugin-dts": "^3.3.1"
   },
   "peerDependencies": {
-    "react": "18.x",
-    "react-dom": "18.x"
+    "react": "16.x || 17.x || 18.x",
+    "react-dom": "16.x || 17.x || 18.x"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "npm run lint:fix"
