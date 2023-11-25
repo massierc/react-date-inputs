@@ -51,6 +51,8 @@ export const DateInputs = ({
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
 
+  const firstRenderRef = useRef(true);
+
   const refs = {
     [Unit.day]: dayInputRef,
     [Unit.month]: monthInputRef,
@@ -70,6 +72,13 @@ export const DateInputs = ({
   });
 
   useEffect(() => {
+    if (firstRenderRef.current) {
+      firstRenderRef.current = false;
+      return;
+    }
+
+    if (!onChange) return;
+
     const {
       day = show.includes(Unit.day) ? undefined : 1,
       month = show.includes(Unit.month) ? undefined : 1,
@@ -79,7 +88,7 @@ export const DateInputs = ({
     const isInitial =
       day === getDate(value!) && month === getMonth(value!) + 1 && year === getYear(value!);
 
-    if (onChange && !isInitial) {
+    if (!isInitial) {
       if (day === undefined || month === undefined || year === undefined) {
         onChange(undefined);
       } else if (isValid(day, month, year) && year.toString().length === 4) {
