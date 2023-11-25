@@ -106,8 +106,6 @@ export const DateInputs = ({
     const currentIndex = show.indexOf(unit);
     const nextUnit = show[currentIndex + 1];
 
-    // if (!nextUnit) return;
-
     const goToNext =
       (unit === Unit.day && parseInt(day + '1', 10) > maxDays) ||
       (unit === Unit.month && parseInt(month + '1', 10) > 12) ||
