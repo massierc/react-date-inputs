@@ -1,4 +1,12 @@
-import { isValid as isValidFns } from 'date-fns';
+import { getDate, getMonth, getYear, isValid as isValidFns } from 'date-fns';
+
+export function parse(date: Date): DateUnits {
+  return {
+    [Unit.day]: getDate(date) || undefined,
+    [Unit.month]: getMonth(date) + 1 || undefined,
+    [Unit.year]: getYear(date) || undefined,
+  }
+}
 
 export function daysInMonth(month: number, year?: number): number {
   switch (month) {

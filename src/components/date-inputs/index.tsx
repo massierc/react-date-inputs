@@ -1,7 +1,7 @@
 import { forwardRef, HTMLProps, useEffect, useRef, useState } from 'react';
 import { getDate, getMonth, getYear } from 'date-fns';
 
-import { type DateUnits, daysInMonth, getCappedUnits, isValid, Unit } from 'src/utils/date';
+import { type DateUnits, parse, daysInMonth, getCappedUnits, isValid, Unit } from 'src/utils/date';
 
 export const BASE_CLASS = 'react-date-inputs';
 
@@ -65,11 +65,7 @@ export const DateInputs = ({
     [Unit.year]: yearPlaceholder,
   };
 
-  const [parsedValues, setParsedValues] = useState<DateUnits>({
-    [Unit.day]: getDate(value!) || undefined,
-    [Unit.month]: getMonth(value!) + 1 || undefined,
-    [Unit.year]: getYear(value!) || undefined,
-  });
+  const [parsedValues, setParsedValues] = useState<DateUnits>(parse(value!));
 
   useEffect(() => {
     if (firstRenderRef.current) {
@@ -99,6 +95,10 @@ export const DateInputs = ({
 
     onChange(undefined);
   }, [parsedValues, onChange, show, value]);
+
+  useEffect(() => {
+    setParsedValues(parse(value!));
+  }, [value]);
 
   const handleAutoFocus = ({ day, month, year }: DateUnits, unit: keyof typeof Unit) => {
     const maxDays = month ? daysInMonth(month, year) : 31;
