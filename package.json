@@ -1,6 +1,6 @@
 {
   "name": "react-date-inputs",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Simple date inputs for React",
   "main": "dist/index.js",
   "scripts": {
@@ -105,6 +105,5 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "npm run lint:fix"
   },
-  "readme": "ERROR: No README data found!",
-  "_id": "react-date-inputs@1.7.0"
+  "readme": "ERROR: No README data found!"
 }
