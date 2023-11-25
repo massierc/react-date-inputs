@@ -85,18 +85,19 @@ export const DateInputs = ({
       year = show.includes(Unit.year) ? undefined : 2020,
     } = parsedValues;
 
-    const isInitial =
-      day === getDate(value!) && month === getMonth(value!) + 1 && year === getYear(value!);
+    const isValidValue =
+      day !== undefined &&
+      month !== undefined &&
+      year !== undefined &&
+      isValid(day, month, year) &&
+      year.toString().length === 4;
 
-    if (!isInitial) {
-      if (day === undefined || month === undefined || year === undefined) {
-        onChange(undefined);
-      } else if (isValid(day, month, year) && year.toString().length === 4) {
-        onChange(new Date(year, month - 1, day));
-      } else {
-        onChange(undefined);
-      }
+    if (isValidValue) {
+      onChange(new Date(year, month - 1, day));
+      return;
     }
+
+    onChange(undefined);
   }, [parsedValues, onChange, show, value]);
 
   const handleAutoFocus = ({ day, month, year }: DateUnits, unit: keyof typeof Unit) => {
